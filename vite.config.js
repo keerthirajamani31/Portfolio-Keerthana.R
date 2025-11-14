@@ -7,9 +7,8 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: process.env.NODE_ENV === 'production' 
-    ? '/PORTFOLIO-KEERTHANA/' 
-    : '/',
+  // Remove the base path or set it to empty
+  base: '/',
   server: {
     host: true,
     port: 5173

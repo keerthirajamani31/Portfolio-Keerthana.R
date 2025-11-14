@@ -4,23 +4,27 @@ const Projects = () => {
   const projects = [
     {
       title: "Student Portal CRUD",
-      description: "A complete Student Management CRUD application built with HTML, CSS, and JavaScript, featuring student data management, responsive design, and interactive UI.",
+      description: "A complete Student Management CRUD application built with React, featuring student data management, responsive design, and interactive UI with Vercel deployment.",
       icon: "bx bxs-graduation",
-      link: "https://keerthirajamani31.github.io/CRUD-APPLICATION/",
+      link: "https://crud-theta-black.vercel.app/",
       type: "external"
     },
     {
       title: "Food Delivery App",
-      description: "A full-stack Food Delivery platform with Express, MongoDB database featuring responsive design, food catalog, admin panel, and interactive UI components.",
+      description: "A full-stack Food Delivery platform with React, featuring responsive design, food catalog, cart system, order management, and admin panel deployed on Vercel.",
       icon: "bx bxs-restaurant",
-      link: "https://keerthirajamani31.github.io/Food-delivery-frontend/",
-      type: "external"
+      link: "https://food-app-lyart-nine.vercel.app/",
+      type: "external",
+      adminLink: "https://food-app-lyart-nine.vercel.app/#/admin",
+      credentials: {
+        email: "admin@example.com",
+        password: "admin123"
+      }
     }
   ];
 
   const handleProjectClick = (project) => {
     if (project.link && project.link !== "#") {
-      // Ensure the link has proper protocol
       let url = project.link;
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         url = 'https://' + url;
@@ -29,12 +33,15 @@ const Projects = () => {
     }
   };
 
-  const getFormattedLink = (link) => {
-    if (link && link !== "#") {
-      // Remove protocol for display to make it look cleaner
-      return link.replace(/^https?:\/\//, '');
+  const handleFoodAppClick = (isUserSite) => {
+    const project = projects.find(p => p.title === "Food Delivery App");
+    if (project) {
+      if (isUserSite) {
+        window.open(project.link, '_blank', 'noopener,noreferrer');
+      } else {
+        window.open(project.adminLink, '_blank', 'noopener,noreferrer');
+      }
     }
-    return link;
   };
 
   return (
@@ -46,28 +53,57 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div 
               key={project.title}
-              className={`bg-gradient-to-br from-purple-600 to-blue-600 p-8 rounded-2xl shadow-2xl transition-transform duration-300 ${
-                project.link !== "#" ? 'hover:scale-105 cursor-pointer' : 'cursor-default'
-              }`}
-              onClick={() => project.link !== "#" && handleProjectClick(project)}
+              className="bg-gradient-to-br from-purple-600 to-blue-600 p-8 rounded-2xl shadow-2xl transition-all duration-300"
             >
               <i className={`${project.icon} text-6xl text-yellow-300 mb-4`}></i>
               <h3 className="text-2xl font-bold text-yellow-300 mb-4">{project.title}</h3>
               <p className="text-white/90 mb-6 leading-relaxed">{project.description}</p>
-              <div className="flex flex-col gap-2">
-                <div className={`inline-block px-6 py-3 rounded-lg font-bold transition-colors ${
-                  project.link !== "#" 
-                    ? 'bg-cyan-400 text-black hover:bg-cyan-300' 
-                    : 'bg-gray-500 text-white cursor-default'
-                }`}>
-                  {project.link !== "#" ? "View Live Demo" : "Under Development"}
+              
+              {/* Special handling for Food Delivery App */}
+              {project.title === "Food Delivery App" && project.adminLink ? (
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button 
+                      onClick={() => handleFoodAppClick(true)}
+                      className="flex-1 bg-green-500 text-white px-4 py-3 rounded-lg font-bold hover:bg-green-400 transition-colors text-center flex items-center justify-center gap-2"
+                    >
+                      <i className="bx bx-user"></i>
+                      User Site
+                    </button>
+                    <button 
+                      onClick={() => handleFoodAppClick(false)}
+                      className="flex-1 bg-orange-500 text-white px-4 py-3 rounded-lg font-bold hover:bg-orange-400 transition-colors text-center flex items-center justify-center gap-2"
+                    >
+                      <i className="bx bx-cog"></i>
+                      Admin Panel
+                    </button>
+                  </div>
+                  
+                  {/* Add the external link icon button like CRUD */}
+                  <button 
+                    onClick={() => handleProjectClick(project)}
+                    className="w-full bg-cyan-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-cyan-300 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <i className="bx bx-link-external"></i>
+                    View Main Project
+                  </button>
                 </div>
-                {project.link !== "#" && (
-                  <span className="text-sm text-cyan-300 text-center">
-                    {getFormattedLink(project.link)}
-                  </span>
-                )}
-              </div>
+              ) : (
+                /* Regular project button */
+                <div className="flex flex-col gap-2">
+                  <button 
+                    onClick={() => handleProjectClick(project)}
+                    className={`w-full px-6 py-3 rounded-lg font-bold transition-colors ${
+                      project.link !== "#" 
+                        ? 'bg-cyan-400 text-black hover:bg-cyan-300' 
+                        : 'bg-gray-500 text-white cursor-default'
+                    } flex items-center justify-center gap-2`}
+                  >
+                    <i className="bx bx-link-external"></i>
+                    {project.link !== "#" ? "View Project" : "Under Development"}
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -81,7 +117,6 @@ const Projects = () => {
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here
     alert('Message sent! (This is a demo)');
   };
 
