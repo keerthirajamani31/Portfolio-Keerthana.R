@@ -2,7 +2,7 @@ import React from 'react';
 
 const Herocontent = () => {
   const handleDownloadCV = () => {
-    const pdfUrl = '/Keerthana_r_resume.pdf';
+    const pdfUrl = '/KEERTHANA_R__Resume.pdf';
     const link = document.createElement('a');
     link.href = pdfUrl;
     link.download = 'KEERTHANA_R__Resume.pdf';
