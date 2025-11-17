@@ -5,7 +5,7 @@ const Herocontent = () => {
     const pdfUrl = '/Keerthana_r_resume.pdf';
     const link = document.createElement('a');
     link.href = pdfUrl;
-    link.download = 'Keerthana_r_resume.pdf';
+    link.download = 'KEERTHANA_R__Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://keerthirajamani31.github.io/PORTFOLIO-KEERTHANA",
+  "homepage": "https://keerthirajamani31.github.io/Portfolio-Keerthana.R",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
